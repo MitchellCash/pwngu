@@ -1,7 +1,7 @@
 {
   "name": "pwngu",
   "version": "1.0.0",
-  "description": "",
+  "description": "Tool to compare a plain text list of pwned password against a bcrypt hashed list of passwords.",
   "private": true,
   "license": "MIT",
   "main": "src/index.js",
