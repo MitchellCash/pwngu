@@ -13,21 +13,28 @@ require('dotenv').config()
  * @returns {Promise<[string]>}
  */
 async function loadFile(filePath) {
-  const file = fs.createReadStream(filePath);
-
-  const fileRl = readline.createInterface({
-    input: file,
-    crlfDelay: Infinity
-  });
-
-  const lines = [];
-  for await (const line of fileRl) {
-    if (line) {
-      lines.push(line);
+  return new Promise(async function (resolve, reject) {
+    if (!filePath) {
+      reject();
+      return;
     }
-  }
 
-  return lines;
+    const file = fs.createReadStream(filePath);
+
+    const fileRl = readline.createInterface({
+      input: file,
+      crlfDelay: Infinity
+    });
+
+    const lines = [];
+    for await (const line of fileRl) {
+      if (line) {
+        lines.push(line);
+      }
+    }
+
+    resolve(lines);
+  });
 }
 
 /**
@@ -37,11 +44,25 @@ async function loadFile(filePath) {
  */
 async function findPwnedPasswords() {
   return new Promise(async function (resolve, reject) {
+    // Check required environment variables are set.
+    if (typeof process.env.HASHED_PASSWORD_FILE === 'undefined') {
+      reject("Error: Missing HASHED_PASSWORD_FILE environment variable");
+      return;
+    }
+
     console.time('Time elapsed');
 
     const plainTextPasswordFile = process.env.PLAIN_TEXT_PASSWORD_FILE || 'data/PwnedPasswordsTop100k.txt';
-    const plainTextPasswordList = await loadFile(plainTextPasswordFile);
-    const hashedPasswordList = await loadFile(process.env.HASHED_PASSWORD_FILE);
+    let plainTextPasswordList;
+    let hashedPasswordList;
+
+    try {
+      plainTextPasswordList = await loadFile(plainTextPasswordFile);
+      hashedPasswordList = await loadFile(process.env.HASHED_PASSWORD_FILE);
+    } catch (err) {
+      reject();
+      return;
+    }
 
     let processed = 0;
     let pwned = 0;
@@ -74,5 +95,11 @@ async function findPwnedPasswords() {
 
 findPwnedPasswords().then((res) => {
   console.log(`Results: ${res[0]} / ${res[1]} pwned passwords`);
-  console.log("Pwngu password comparison complete!")
+  console.log("Pwngu password comparison complete!");
+}).catch((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("An error occurred!");
+  }
 });
