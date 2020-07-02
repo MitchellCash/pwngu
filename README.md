@@ -5,6 +5,12 @@ For example, this can be useful for comparing a bcrypt hashed database list of p
 list of common (and insecure) passwords (see
 [data/PwnedPasswordsTop100k.txt](data/PwnedPasswordsTop100k.txt)). 
 
+## Usage
+
+1. Copy `.env.example` to `.env` and fill in the blanks
+
+2. `npm run start` 
+
 ## Acknowledgments
 
 A big thank you to Troy Hunt/Have I Been Pwned and the NCSC for releasing this list (available
