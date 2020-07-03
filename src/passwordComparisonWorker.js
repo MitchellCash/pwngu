@@ -13,7 +13,7 @@ module.exports = async function (clearPass, encryptedPass, callback) {
   const isPwned = await bcrypt.compare(fullClearPass, encryptedPass);
 
   // If there is a match log the result.
-  if (isPwned) {
+  if (isPwned && process.env.NODE_ENV !== 'test') {
     console.log(`Password hash is pwned: ${encryptedPass}`);
     console.log(`Password is: ${clearPass}`);
     console.log();

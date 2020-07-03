@@ -6,11 +6,15 @@
   "license": "MIT",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "test": "jest"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "worker-farm": "^1.7.0"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0"
   }
 }
