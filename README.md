@@ -5,6 +5,8 @@ For example, this can be useful for comparing a bcrypt hashed database list of p
 list of common (and insecure) passwords (see
 [data/PwnedPasswordsTop100k.txt](data/PwnedPasswordsTop100k.txt)). 
 
+Why is it called **pwngu**? I was thinking of the penguin Pingu at the time....
+
 ## Usage
 
 1. Copy `.env.example` to `.env` and fill in the blanks
