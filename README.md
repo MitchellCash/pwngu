@@ -3,7 +3,8 @@
 A tool to compare a plain text list of "pwned" passwords against a bcrypt hashed list of passwords.
 For example, this can be useful for comparing a bcrypt hashed database list of passwords against a
 list of common (and insecure) passwords (see
-[data/PwnedPasswordsTop100k.txt](data/PwnedPasswordsTop100k.txt)). 
+[data/PwnedPasswordsTop100k.txt](data/PwnedPasswordsTop100k.txt)) to warn a user their current
+password should be changed to something more secure.
 
 Why is it called **pwngu**? I was thinking of the penguin Pingu at the time....
 
@@ -11,7 +12,7 @@ Why is it called **pwngu**? I was thinking of the penguin Pingu at the time....
 
 1. Copy `.env.example` to `.env` and fill in the blanks
 
-2. `npm run start` 
+2. `npm run start`
 
 ⚠️ **Before you get started:**
 
